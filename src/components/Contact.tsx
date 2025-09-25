@@ -1,50 +1,43 @@
-import { useState } from "react";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
 import { useToast } from "../hooks/use-toast";
 import emailjs from "@emailjs/browser";
+import { contactSchema, type ContactFormData } from "../schemas/contactSchema";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: ""
-  });
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+  });
 
-    emailjs.send(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      formData,
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    )
-    .then(() => {
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        data,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
       toast({
         title: "✅ Message envoyé !",
         description: "Merci pour votre message.",
       });
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, (error) => {
+
+      reset(); // réinitialiser le formulaire
+    } catch (error) {
       toast({
         title: "Erreur !",
         description: "Le message n'a pas pu être envoyé. Réessayez plus tard.",
       });
       console.error(error);
-    });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    }
   };
 
   const contactInfo = [
@@ -66,12 +59,11 @@ const Contact = () => {
       value: "Casablanca, Maroc",
     }
   ];
-
+  
   return (
     <section id="contact" className="py-20">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
-          {/* Title */}
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Prenons <span className="text-gradient">contact</span>
@@ -89,63 +81,59 @@ const Contact = () => {
                 <CardTitle className="text-2xl">Envoyez-moi un message</CardTitle>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <Input
-                        name="name"
                         placeholder="Votre nom"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
+                        {...register("name")}
                         className="glass"
-                      />
+                        />
+                      {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
                     </div>
                     <div>
                       <Input
-                        name="email"
-                        type="email"
                         placeholder="Votre email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
+                        type="email"
+                        {...register("email")}
                         className="glass"
-                      />
+                          />
+                      {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                     </div>
                   </div>
                   
                   <Input
-                    name="subject"
                     placeholder="Sujet"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
+                    {...register("subject")}
                     className="glass"
-                  />
-                  
+                    />
+                  {errors.subject && <p className="text-red-500 text-sm">{errors.subject.message}</p>}
+
                   <Textarea
-                    name="message"
                     placeholder="Votre message..."
                     rows={6}
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
+                    {...register("message")}
                     className="glass resize-none"
-                  />
-                  
+                    />
+                  {errors.message && <p className="text-red-500 text-sm">{errors.message.message}</p>}
+
                   <Button 
                     type="submit" 
                     size="lg" 
                     variant="gradient"
                     className="w-full hover:scale-105 transition-transform"
+                    disabled={isSubmitting}
                   >
-                    <Send size={20} className="mr-2" />
+                    {isSubmitting ? (
+                      <Loader2 size={20} className="mr-2 animate-spin" />
+                    ) : (
+                      <Send size={20} className="mr-2" />
+                    )}
                     Envoyer le message
                   </Button>
                 </form>
               </CardContent>
             </Card>
-
             {/* Contact Info */}
             <div className="space-y-8">
               <div>

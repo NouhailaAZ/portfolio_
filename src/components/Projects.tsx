@@ -59,7 +59,7 @@ const Projects = () => {
               Mes <span className="text-gradient">projets</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Pendant ma formation et en travaillant en autonomie, j'ai mené ces projets pour transformer mes apprentissages en expériences concrètes.
+              Au cours de ma formation, j’ai réalisé différents projets, certains en équipe et d’autres en autonomie, afin de mettre en pratique mes connaissances et en faire de vraies expériences concrètes.
             </p>
           </div>
 
