@@ -1,69 +1,67 @@
-# React + TypeScript + Vite
+# 🌐 Portfolio - Nouhaila AZLAG
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Mon portfolio personnel développé avec **React, TypeScript et TailwindCSS**, présentant mon parcours, mes compétences, mes projets et mes expériences.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Aperçu
 
-## Expanding the ESLint configuration
+![Aperçu du Portfolio](./src/assets/imagePortfolio_.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+<!-- 👉 [Voir le portfolio en ligne](https://ton-lien-vercel-ou-netlify.com) -->
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📌 Sections
+
+- **Accueil** : Présentation et liens vers mes réseaux.  
+- **À propos** : Parcours académique et professionnel.  
+- **Compétences** : Hard et soft skills.  
+- **Projets** : Sélection de projets personnels et académiques.  
+- **Contact** : Formulaire de contact et coordonnées.  
+
+
+
+## 🛠️ Stack technique
+
+- **Frontend** : React, TypeScript  
+- **UI** : TailwindCSS, ShadCN UI, Lucide Icons  
+- **Gestion formulaire** : React Hook Form, Zod  
+- **Animations** : Tailwind Animate  
+
+
+
+## 🚀 Installation & lancement
+
+Clone le repo :
+
+```bash
+git clone https://github.com/NouhailaAZ/portfolio_.git
+cd portfolio_
+```
+Installe les dépendances :
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Lance en développement :
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+
+## 📂 Structure du projet
+```bash
+src/
+ ├── assets/         
+ ├── components/     
+ ├── hooks/          
+ ├── lib/            
+ ├── pages/           
+ ├── schemas/        
+ └── App.tsx         
+```
+---
+## 👩‍💻 
+👋 Développé par Nouhaila AZLAG
