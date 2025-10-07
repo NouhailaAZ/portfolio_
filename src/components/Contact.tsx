@@ -33,7 +33,7 @@ const Contact = () => {
       reset(); // réinitialiser le formulaire
     } catch (error) {
       toast({
-        title: "Erreur !",
+        title: "❌ Erreur !",
         description: "Le message n'a pas pu être envoyé. Réessayez plus tard.",
       });
       console.error(error);
