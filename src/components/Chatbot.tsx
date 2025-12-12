@@ -35,7 +35,7 @@ const Chatbot = () => {
       // Ajouter la réponse du bot
       setMessages((prev) => [...prev, { type: "bot", text: data.answer }]);
     } catch (error) {
-      setMessages((prev) => [...prev, { type: "bot", text: "Erreur serveur." }]);
+      setMessages((prev) => [...prev, { type: "bot", text: "Erreur serveur. Veuillez essayer ultérieurement." }]);
     } finally {
       setLoading(false); // masquer loader
     }
@@ -60,7 +60,7 @@ const Chatbot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-20 right-4 z-50 w-80 max-w-xs rounded-lg shadow-lg p-4 glass bg-gray-800 flex flex-col">
+        <div className="fixed bottom-20 right-4 z-50 w-100 rounded-lg shadow-lg p-4 glass bg-gray-800 flex flex-col">
           <h3 className="text-lg text-white font-bold mb-3">🤖 Chat avec Bot</h3>
 
           {/* Messages */}
